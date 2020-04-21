@@ -1,0 +1,11 @@
+.git/
+
+# Ignoring pycaches
+__pycache__/
+bot_commands/__pycache__/
+settings/__pycache__/
+instruments/__pycache__/
+# Ignoring differents python interpretator and venv files
+.spec
+.idea/
+venv/
