@@ -35,7 +35,7 @@ class RemovedFile:
         self.removal_path = os.path.split(removal_path)[0]
         self.removal_time = datetime.datetime.now().strftime("%d-%m-%Y,%H:%M:%S")
         self.current_path = current_path
-        self.size = tools.convert_bytes(os.path.getsize(removal_path))
+        self.size = tools.convert_bytes(tools.size(removal_path))
         module_logger.debug('Create removed file')
 
     def information(self):
@@ -133,7 +133,6 @@ class SmartRM:
         if not name_of_trash:
             for file in os.listdir(path):
                 trash_path = os.path.join(path, file)
-                print(trash_path)
                 self.move_to_bin(trash_path)
             return True
         new_trash_path = os.path.join(self.trash_can_path, name_of_trash)
@@ -219,8 +218,11 @@ def argparser(trash_can: SmartRM):
         if not args.path:
             print('Name of trash in can not entering')
             return
-        trash_can.restore(args.path)
-        print(f'File {args.path} restored from can')
+        result = trash_can.restore(args.path)
+        if result:
+            print(f'File {args.path} restored from can')
+        else:
+            print('What are you want to do?. Failed to restore. Restore path unavailable')
     elif args.clear:
         if not args.path:
             print('Name of trash in can not entering')
@@ -235,5 +237,5 @@ def argparser(trash_can: SmartRM):
 
 
 if __name__ == '__main__':
-    trash_can = SmartRM()
-    argparser(trash_can)
+    my_trash_can = SmartRM()
+    argparser(my_trash_can)

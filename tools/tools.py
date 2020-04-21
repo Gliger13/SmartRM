@@ -1,3 +1,5 @@
+import os
+
 def convert_bytes(num):
     """
     this function will convert bytes to MB.... GB... etc
@@ -8,5 +10,19 @@ def convert_bytes(num):
         num /= 1024.0
 
 
-if __name__ == '__main__':
-    print(convert_bytes(4096))
+def size(path: str) -> int:
+    """
+    Gets file or folder size recursively in bytes
+    :param path: path to file or folder
+    :return bytes: size of file or folder
+    """
+    if os.path.isdir(path):
+        result = os.path.getsize(path)
+        for file in os.listdir(path):
+            file_path = os.path.join(path, file)
+            result += size(file_path)
+        return result
+    else:
+        return os.path.getsize(path)
+
+
