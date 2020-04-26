@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import argparse
 
-import remover
+from remover import remover
 
 
 def argparser(trash_can: remover.SmartRM):

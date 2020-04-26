@@ -7,7 +7,6 @@ import zipfile
 from functools import wraps
 from pathlib import Path
 
-from tools import logger
 from tools import tools
 
 module_logger = logging.getLogger('SmartRM')
